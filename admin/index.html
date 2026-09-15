@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>Quan Ly San Pham - Admin</title>
+  <link rel="stylesheet" href="../asset/css/admin.css">
+</head>
+<body>
+
+  <!-- Admin Header -->
+  <header class="admin-header">
+    <div class="container header-content">
+      <a href="./index.html" class="logo">CyberPhone Admin</a>
+      <nav class="nav-links">
+        <a href="../index.html">Quay lai cua hang</a>
+        <a href="./index.html" class="active">Quan ly san pham</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Admin Main -->
+  <main class="admin-main">
+    <div class="container">
+      <div class="admin-card">
+        
+        <!-- Toolbar -->
+        <div class="admin-toolbar">
+          <div class="toolbar-left">
+            <input 
+              type="text" 
+              id="searchProduct" 
+              class="search-input" 
+              placeholder="Tim kiem san pham theo ten..." 
+              oninput="handleSearch()"
+            >
+            <select id="sortPrice" class="sort-select" onchange="handleSort()">
+              <option value="default">Sap xep theo gia: Mac dinh</option>
+              <option value="asc">Gia tang dan (Be den Lon)</option>
+              <option value="desc">Gia giam dan (Lon den Be)</option>
+            </select>
+          </div>
+          <div>
+            <button class="btn btn-primary" onclick="openAddModal()">Them san pham moi</button>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th style="width: 50px;">STT</th>
+                <th>Ten san pham</th>
+                <th>Gia ban</th>
+                <th>Hinh anh</th>
+                <th>Loai</th>
+                <th>Thong so ky thuat</th>
+                <th>Mo ta</th>
+                <th style="width: 140px;">Hanh dong</th>
+              </tr>
+            </thead>
+            <tbody id="adminTableBody">
+              <!-- Rendered dynamically by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal Form -->
+  <div class="modal-overlay" id="productModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 id="modalTitle">Them San Pham Moi</h3>
+        <button class="close-btn" onclick="closeProductModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="productForm">
+          <div class="form-group">
+            <label for="productName">Ten san pham:</label>
+            <input type="text" id="productName" class="form-control" placeholder="Nhap ten san pham">
+            <div class="error-feedback" id="errName"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="productPrice">Gia san pham (VND):</label>
+            <input type="number" id="productPrice" class="form-control" placeholder="Nhap gia san pham">
+            <div class="error-feedback" id="errPrice"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="productType">Loai san pham:</label>
+            <select id="productType" class="form-control">
+              <option value="">-- Chon loai san pham --</option>
+              <option value="Samsung">Samsung</option>
+              <option value="Iphone">iPhone</option>
+            </select>
+            <div class="error-feedback" id="errType"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="productScreen">Thong so man hinh:</label>
+            <input type="text" id="productScreen" class="form-control" placeholder="Vi du: OLED 6.1 inch, Full HD+">
+            <div class="error-feedback" id="errScreen"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="productBackCamera">Camera sau:</label>
+            <input type="text" id="productBackCamera" class="form-control" placeholder="Vi du: 12 MP + 12 MP">
+            <div class="error-feedback" id="errBackCamera"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="productFrontCamera">Camera truoc:</label>
+            <input type="text" id="productFrontCamera" class="form-control" placeholder="Vi du: 12 MP">
+            <div class="error-feedback" id="errFrontCamera"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="productImg">Link hinh anh (URL):</label>
+            <input type="text" id="productImg" class="form-control" placeholder="https://example.com/hinh-anh.jpg">
+            <div class="error-feedback" id="errImg"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="productDesc">Mo ta san pham:</label>
+            <textarea id="productDesc" class="form-control" placeholder="Nhap thong tin mo ta chi tiet"></textarea>
+            <div class="error-feedback" id="errDesc"></div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeProductModal()">Huy</button>
+        <button type="button" class="btn btn-primary" onclick="handleSaveProduct()">Luu san pham</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="./models/Products.js"></script>
+  <script src="./services/productService.js"></script>
+  <script src="./controllers/admin.js"></script>
+</body>
+</html>

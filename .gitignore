@@ -1,0 +1,8 @@
+# Ignore suggestion, prompt, rule, and asset files as requested
+*.pdf
+*.pptx
+*.drawio
+*.txt
+*.png
+*.ps1
+CAPSTONE_JS_RULES.md

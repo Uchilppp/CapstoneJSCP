@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>Cua Hang Dien Thoai - Capstone JS</title>
+  <link rel="stylesheet" href="./asset/css/main.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-content">
+      <a href="./index.html" class="logo">CyberPhone</a>
+      <nav class="nav-links">
+        <a href="./index.html" class="active">Trang chu</a>
+        <a href="./admin/index.html">Trang quan tri</a>
+      </nav>
+      <div class="header-actions">
+        <button class="btn btn-cart" onclick="openCartModal()">
+          <span>Gio hang</span>
+          <span class="badge" id="cartBadge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Toast Notification -->
+  <div id="toastNotification" class="toast-notification"></div>
+
+  <!-- Banner -->
+  <section class="hero-banner">
+    <div class="container banner-content">
+      <h1>The Gioi Smartphone Chinh Hang</h1>
+      <p>Trai nghiem nhung dong dien thoai thong minh hang dau tu Apple va Samsung voi gia uu dai nhat.</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container">
+    <div class="section-toolbar">
+      <h2 class="section-title">Danh sach san pham</h2>
+      <div class="filter-box">
+        <label for="selectType">Loc theo hang:</label>
+        <select id="selectType" onchange="filterProducts()">
+          <option value="all">Tat ca san pham</option>
+          <option value="samsung">Samsung</option>
+          <option value="iphone">iPhone</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="product-grid" id="productList">
+      <!-- Rendered dynamically by JavaScript -->
+    </div>
+  </main>
+
+  <!-- Cart Modal -->
+  <div class="modal-overlay" id="cartModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3>Gio hang cua ban</h3>
+        <button class="close-btn" onclick="closeCartModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div style="overflow-x: auto;">
+          <table class="cart-table">
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>San pham</th>
+                <th>Don gia</th>
+                <th style="width: 130px;">So luong</th>
+                <th>Thanh tien</th>
+                <th>Hanh dong</th>
+              </tr>
+            </thead>
+            <tbody id="cartTableBody">
+              <!-- Rendered dynamically by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="cart-summary">
+          Tong thanh toan: <strong id="cartTotal">0 VND</strong>
+        </div>
+        <div class="modal-actions">
+          <button class="btn btn-secondary" onclick="clearCart()">Xoa tat ca</button>
+          <button class="btn btn-primary" onclick="checkout()">Thanh toan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>Capstone JavaScript - Cybersoft</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="./customer/models/Products.js"></script>
+  <script src="./customer/models/CartItem.js"></script>
+  <script src="./customer/services/productService.js"></script>
+  <script src="./customer/controllers/main.js"></script>
+</body>
+</html>
